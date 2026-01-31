@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "CarSpa - Production",
+            "type": "al",
+            "request": "launch",
+            "environmentType": "Production",
+            "environmentName": "Production",
+            "tenant": "32fa0923-9fe5-4ee4-9f87-450d23c0ea31",
+            "authentication": "AAD",
+            "startupObjectId": 22,
+            "startupObjectType": "Page",
+            "breakOnError": "All",
+            "launchBrowser": true
+        },
+        {
+            "name": "CarSpa - Sandbox",
+            "type": "al",
+            "request": "launch",
+            "environmentType": "Sandbox",
+            "environmentName": "CarSpa_Sandbox3",
+            "tenant": "32fa0923-9fe5-4ee4-9f87-450d23c0ea31",
+            "authentication": "AAD",
+            "startupObjectId": 22,
+            "startupObjectType": "Page",
+            "breakOnError": "All",
+            "launchBrowser": true
+        }
+    ]
+}
