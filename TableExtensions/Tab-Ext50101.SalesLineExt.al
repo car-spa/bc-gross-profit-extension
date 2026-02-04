@@ -55,25 +55,30 @@ tableextension 50101 "Sales Line Ext" extends "Sales Line"
         SalesLine: Record "Sales Line";
         TotalSales: Decimal;
     begin
-        if SalesHeader.Get("Document Type", "Document No.") then begin
-            // Total Gross Profit beregnes automatisk via FlowField
-            SalesHeader.CalcFields("Total Gross Profit");
+        if not SalesHeader.Get("Document Type", "Document No.") then
+            exit;
 
-            // Beregn total salgsbeløp for prosentberegning
-            SalesLine.SetRange("Document Type", "Document Type");
-            SalesLine.SetRange("Document No.", "Document No.");
-            if SalesLine.FindSet() then
-                repeat
-                    TotalSales += SalesLine."Line Amount";
-                until SalesLine.Next() = 0;
+        // Sjekk om det fortsatt finnes linjer - hvis ikke, er dokumentet sannsynligvis under sletting
+        SalesLine.SetRange("Document Type", "Document Type");
+        SalesLine.SetRange("Document No.", "Document No.");
+        if SalesLine.IsEmpty() then
+            exit;
 
-            if TotalSales <> 0 then
-                SalesHeader."Total Gross Profit %" := (SalesHeader."Total Gross Profit" / TotalSales) * 100
-            else
-                SalesHeader."Total Gross Profit %" := 0;
+        // Total Gross Profit beregnes automatisk via FlowField
+        SalesHeader.CalcFields("Total Gross Profit");
 
-            SalesHeader.Modify(false);
-        end;
+        // Beregn total salgsbeløp for prosentberegning
+        if SalesLine.FindSet() then
+            repeat
+                TotalSales += SalesLine."Line Amount";
+            until SalesLine.Next() = 0;
+
+        if TotalSales <> 0 then
+            SalesHeader."Total Gross Profit %" := (SalesHeader."Total Gross Profit" / TotalSales) * 100
+        else
+            SalesHeader."Total Gross Profit %" := 0;
+
+        SalesHeader.Modify(false);
     end;
 
     trigger OnBeforeModify()
