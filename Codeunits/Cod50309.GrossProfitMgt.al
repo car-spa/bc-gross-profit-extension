@@ -1,4 +1,4 @@
-codeunit 50110 "Gross Profit Mgt"
+codeunit 50309 "Gross Profit Mgt"
 {
     procedure RecalculateAllSalesLines()
     var

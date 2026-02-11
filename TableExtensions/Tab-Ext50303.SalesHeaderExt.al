@@ -1,8 +1,8 @@
-tableextension 50100 "Sales Header Ext" extends "Sales Header"
+tableextension 50303 "Sales Header Ext" extends "Sales Header"
 {
     fields
     {
-        field(50101; "Total Gross Profit"; Decimal)
+        field(50303; "Total Gross Profit"; Decimal)
         {
             Caption = 'Total bruttofortjeneste';
             FieldClass = FlowField;
@@ -10,7 +10,7 @@ tableextension 50100 "Sales Header Ext" extends "Sales Header"
             Editable = false;
         }
 
-        field(50103; "Total Cost Amount"; Decimal)
+        field(50305; "Total Cost Amount"; Decimal)
         {
             Caption = 'Total kostpris';
             FieldClass = FlowField;
@@ -18,7 +18,7 @@ tableextension 50100 "Sales Header Ext" extends "Sales Header"
             Editable = false;
         }
 
-        field(50102; "Total Gross Profit %"; Decimal)
+        field(50304; "Total Gross Profit %"; Decimal)
         {
             Caption = 'Total margin %';
             DataClassification = CustomerContent;

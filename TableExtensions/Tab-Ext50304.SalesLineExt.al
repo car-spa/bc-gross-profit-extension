@@ -1,15 +1,15 @@
-tableextension 50101 "Sales Line Ext" extends "Sales Line"
+tableextension 50304 "Sales Line Ext" extends "Sales Line"
 {
     fields
     {
-        field(50100; "Gross Profit Amount"; Decimal)
+        field(50303; "Gross Profit Amount"; Decimal)
         {
             Caption = 'Bruttofortjeneste';
             DataClassification = CustomerContent;
             Editable = false;
         }
 
-        field(50101; "Gross Profit %"; Decimal)
+        field(50304; "Gross Profit %"; Decimal)
         {
             Caption = 'Margin %';
             DataClassification = CustomerContent;
@@ -17,7 +17,7 @@ tableextension 50101 "Sales Line Ext" extends "Sales Line"
             DecimalPlaces = 2 : 2;
         }
 
-        field(50102; "Cost Amount"; Decimal)
+        field(50305; "Cost Amount"; Decimal)
         {
             Caption = 'Kostbeløp';
             DataClassification = CustomerContent;
@@ -58,16 +58,10 @@ tableextension 50101 "Sales Line Ext" extends "Sales Line"
         if not SalesHeader.Get("Document Type", "Document No.") then
             exit;
 
-        // Sjekk om det fortsatt finnes linjer - hvis ikke, er dokumentet sannsynligvis under sletting
-        SalesLine.SetRange("Document Type", "Document Type");
-        SalesLine.SetRange("Document No.", "Document No.");
-        if SalesLine.IsEmpty() then
-            exit;
-
-        // Total Gross Profit beregnes automatisk via FlowField
         SalesHeader.CalcFields("Total Gross Profit");
 
-        // Beregn total salgsbeløp for prosentberegning
+        SalesLine.SetRange("Document Type", "Document Type");
+        SalesLine.SetRange("Document No.", "Document No.");
         if SalesLine.FindSet() then
             repeat
                 TotalSales += SalesLine."Line Amount";
@@ -97,11 +91,6 @@ tableextension 50101 "Sales Line Ext" extends "Sales Line"
     end;
 
     trigger OnAfterInsert()
-    begin
-        UpdateHeaderTotals();
-    end;
-
-    trigger OnAfterDelete()
     begin
         UpdateHeaderTotals();
     end;

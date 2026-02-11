@@ -1,4 +1,4 @@
-pageextension 50102 "Sales Quote Ext" extends "Sales Quote"
+pageextension 50305 "Sales Quote Ext" extends "Sales Quote"
 {
     layout
     {

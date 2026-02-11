@@ -2,7 +2,7 @@
   "id": "16fe6ac1-4caf-4a67-9655-fbaf46c7f47c",
   "name": "CarSpaGrossProfitExtension",
   "publisher": "CarSpa",
-  "version": "2.1.0.1",
+  "version": "2.1.0.4",
   "brief": "Viser bruttofortjeneste på ordrer og tilbud",
   "description": "Extension for å vise bruttofortjeneste per linje og totalt på salgsordre og tilbud",
   "privacyStatement": "",
@@ -16,13 +16,13 @@
   "application": "27.0.0.0",
   "idRanges": [
     {
-      "from": 50100,
-      "to": 50149
+      "from": 50302,
+      "to": 50310
     }
   ],
   "resourceExposurePolicy": {
     "allowDebugging": true,
-    "allowDownloadingSource": true,
+    "allowDownloadingSource": false,
     "includeSourceInSymbolFile": true
   },
   "runtime": "16.0",
